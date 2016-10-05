@@ -1,0 +1,1 @@
+DcomModule.exe /regserver

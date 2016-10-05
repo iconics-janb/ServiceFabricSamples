@@ -1,0 +1,18 @@
+// DcomModule.idl : IDL source for DcomModule
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (DcomModule.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+[
+	uuid(9F4C304F-F2C4-471E-B3DF-AA6D065B0D99),
+	version(1.0),
+]
+library DcomModuleLib
+{
+	importlib("stdole2.tlb");
+};
+
