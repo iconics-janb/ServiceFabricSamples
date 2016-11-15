@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ApplicationManifest xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ApplicationTypeName="ServiceType" ApplicationTypeVersion="1.0.0" xmlns="http://schemas.microsoft.com/2011/01/fabric">
+  <Description>A manifest to ensure proper permission for DCOM registration</Description>
   <Parameters>
     <Parameter Name="Stateless1_InstanceCount" DefaultValue="-1" />
   </Parameters>
@@ -9,7 +10,13 @@
   <ServiceManifestImport>
     <ServiceManifestRef ServiceManifestName="Stateless1Pkg" ServiceManifestVersion="1.0.0" />
     <ConfigOverrides />
+    <!-- Adding the policies needed to register DCOM Components-->
+    <Policies>
+      <RunAsPolicy CodePackageRef="Code" UserRef="SetupLocalSystem" EntryPointType="Setup" />
+    </Policies>
+    <!-- End of Adding the policies needed to register DCOM Components-->
   </ServiceManifestImport>
+  <!-- Adding the principals needed to register the DCOM Components -->
   <DefaultServices>
     <!-- The section below creates instances of service types, when an instance of this 
          application type is created. You can also create one or more instances of service type using the 
@@ -22,4 +29,15 @@
       </StatelessService>
     </Service>
   </DefaultServices>
+  <Principals>
+    <Users>
+      <!--<User Name="SetupAdminUser">
+        <MemberOf>
+          <SystemGroup Name="Administrators" />
+        </MemberOf>
+      </User>-->
+      <User Name="SetupLocalSystem" AccountType="LocalSystem" />
+    </Users>
+  </Principals>
+  <!-- End of Adding the principals needed to register the DCOM Components -->
 </ApplicationManifest>
